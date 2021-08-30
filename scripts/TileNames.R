@@ -24,33 +24,33 @@ AGBtileNames <- function(pol){
   for(i in 1:nrow(crds)){
     
     if (grepl('2017', agbTilesDir) == TRUE){
-      print('Using agb 2017 v1')
+      print('Using agb 2017 v3')
       lon <- 10*(crds[i,1]%/%10)
       lat <- 10*(crds[i,2]%/%10) + 10
       LtX <- ifelse(lon < 0, "W", "E")
       LtY <- ifelse(lat < 0, "S", "N")
       WE <- paste0(LtX, sprintf('%03d',abs(lon)))
       NS <- paste0(LtY,sprintf('%02d',abs(lat)))
-      fnms[i] <- file.path(agbTilesDir, paste0(NS, WE,"_ESACCI-BIOMASS-L4-AGB-MERGED-100m-2017-fv1.0.tif"))
+      fnms[i] <- file.path(agbTilesDir, paste0(NS, WE,"_ESACCI-BIOMASS-L4-AGB-MERGED-100m-2017-fv3.0.tif"))
       
     }else if (grepl('2010', agbTilesDir) == TRUE){
-      print('Using agb 2010 v1')
+      print('Using agb 2010 v3')
       lon <- 10*(crds[i,1]%/%10)
       lat <- 10*(crds[i,2]%/%10) + 10
       LtX <- ifelse(lon < 0, "W", "E")
       LtY <- ifelse(lat < 0, "S", "N")
       WE <- paste0(LtX, sprintf('%03d',abs(lon)))
       NS <- paste0(LtY,sprintf('%02d',abs(lat)))
-      fnms[i] <- file.path(agbTilesDir, paste0(NS, WE,"_ESACCI-BIOMASS-L4-AGB-MERGED-100m-2010-fv1.0.tif"))
+      fnms[i] <- file.path(agbTilesDir, paste0(NS, WE,"_ESACCI-BIOMASS-L4-AGB-MERGED-100m-2010-fv3.0.tif"))
     }else if (grepl('2018', agbTilesDir) == TRUE){
-      print('Using agb 2018 v1')
+      print('Using agb 2018 v3')
       lon <- 10*(crds[i,1]%/%10)
       lat <- 10*(crds[i,2]%/%10) + 10
       LtX <- ifelse(lon < 0, "W", "E")
       LtY <- ifelse(lat < 0, "S", "N")
       WE <- paste0(LtX, sprintf('%03d',abs(lon)))
       NS <- paste0(LtY,sprintf('%02d',abs(lat)))
-      fnms[i] <- file.path(agbTilesDir, paste0(NS, WE,"_ESACCI-BIOMASS-L4-AGB-MERGED-100m-2018-fv1.0.tif"))
+      fnms[i] <- file.path(agbTilesDir, paste0(NS, WE,"_ESACCI-BIOMASS-L4-AGB-MERGED-100m-2018-fv3.0.tif"))
     }
     
   }

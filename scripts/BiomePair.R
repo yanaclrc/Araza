@@ -1,4 +1,5 @@
-### FUNCTION TO GET THE CORRESPONDING ZONES AND BIOMES OF PLOT LOCATIONS USING PRE-PROCESSED SHAPEFILES
+FUNCTION TO GET THE CORRESPONDING ZONES AND BIOMES OF PLOT LOCATIONS USING PRE-PROCESSED SHAPEFILES
+sf::sf_use_s2(FALSE)
 
 BiomePair <- function(df){
   plots0 <- df
@@ -15,8 +16,8 @@ BiomePair <- function(df){
   
   ## intersect polygons with points, keeping the information from both
  # intZone <- st_intersection(p,st_make_valid(re))
-  intFez0 <- st_intersection(p,st_make_valid(li))
-  df <- st_intersection(st_make_valid(re),intFez0)
+  intFez0 <- sf::st_intersection(p,li)
+  df <- sf::st_intersection(re,intFez0)
   #intZone0 <- intZone0 %>% select(-contains(".1"))
 
   
@@ -31,16 +32,14 @@ BiomePair <- function(df){
   df$FAO.ecozone <- ifelse(df$FAO.ecozone == 'Polar', 'Boreal coniferous forest', df$FAO.ecozone)
   
   df <- subset(df, df$GEZ != 'Water')# | df$GEZ != 'No')
-  df$ZONE <- ifelse(word(df$ZONE, 1) == 'Australia', 'Australia', df$ZONE)
-  df$ZONE <- ifelse(word(df$ZONE, 1) == 'South' | word(df$ZONE, 1) == 'America' , 'S.America', df$ZONE)
-  df$ZONE <- ifelse(word(df$ZONE, 1) == 'Central' | word(df$ZONE, 1) == 'America' , 'C.America', df$ZONE)
+  df$ZONE <- ifelse(grepl('Australia',df$ZONE)==T, 'Australia', df$ZONE)
+  df$ZONE <- ifelse(grepl('South',df$ZONE)==T | grepl('America',df$ZONE)==T, 'S.America', df$ZONE)
+  df$ZONE <- ifelse(grepl('Central',df$ZONE)==T | grepl('America',df$ZONE)==T , 'C.America', df$ZONE)
   
-  df$ZONE <- ifelse(word(df$ZONE, 2) == 'Asia' & !is.na(word(df$ZONE, 2)), 
-                        'Asia', df$ZONE)
-  df$ZONE <- ifelse(word(df$ZONE, 2) == 'Africa' & !is.na(word(df$ZONE, 2)), 
-                        'Africa', df$ZONE)
-  df$ZONE <- ifelse(word(df$ZONE, 2) == 'Europe' & !is.na(word(df$ZONE, 2)), 
-                        'Europe', df$ZONE)
+  df$ZONE <- ifelse(grepl('Asia',df$ZONE)==T, 'Asia', df$ZONE)
+  df$ZONE <- ifelse(grepl('Africa',df$ZONE)==T, 'Africa', df$ZONE)
+  df$ZONE <- ifelse(grepl('Europe',df$ZONE)==T, 'Europe', df$ZONE)
+  
   
   plt <- as.data.frame(df)
   #plt <- plt[order(plt$POINT_Y), ]

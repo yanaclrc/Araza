@@ -19,7 +19,7 @@ rm(list=ls())
 # Packages
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(rgdal,rgeos,raster,plyr,dplyr,foreach,purrr,BIOMASS,data.table,ranger,randomForest,
-               parallel,doParallel,plotrix,gfcanalysis,sf,stringr,Metrics)
+               parallel,doParallel,plotrix,gfcanalysis,sf,Metrics)
 
 
 # Global variables, adapt accordingly e.g. "C:/PlotToMap"
@@ -70,7 +70,7 @@ setwd(dataDir)
   ## (1) PLOT DATA IS POINT DATA AND FORMATTED (SEE TECHNICAL DOCUMENTATION)
   
   plotsFile <- 'SamplePlots.csv'
-  plots <- read.csv(plotsFile) 
+  plots <- read.csv(plotsFile) [1:100,]
 
   
   ## (2) PLOT DATA IS UNFORMATTED i.e. OWN FORMAT OF DATA SOURCE
