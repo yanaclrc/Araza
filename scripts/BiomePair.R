@@ -1,4 +1,4 @@
-FUNCTION TO GET THE CORRESPONDING ZONES AND BIOMES OF PLOT LOCATIONS USING PRE-PROCESSED SHAPEFILES
+#FUNCTION TO GET THE CORRESPONDING ZONES AND BIOMES OF PLOT LOCATIONS USING PRE-PROCESSED SHAPEFILES
 sf::sf_use_s2(FALSE)
 
 BiomePair <- function(df){
@@ -24,7 +24,7 @@ BiomePair <- function(df){
   #order first before joining
   df$ZONE <- as.character(df$SUBREGION)
   df$FAO.ecozone <-  as.character(df$GEZ_TERM)
-  df$GEZ <- word(df$FAO.ecozone, 1)
+  df$GEZ <- gsub("([A-Za-z]+).*", "\\1", df$FAO.ecozone)
   df <- df[ , -which(names(df) %in% c("SUBREGION","GEZ_TERM",'FEZ','ORIG_FID'))]
   
   #some cleaning

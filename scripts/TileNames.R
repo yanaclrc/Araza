@@ -10,7 +10,7 @@ TCtileNames <- function(pol){
     LtY <- ifelse(lat < 0, "S", "N")
     WE <- paste0(sprintf('%03d',abs(lon)), LtX)
     NS <- paste0(sprintf('%02d',abs(lat)), LtY)
-    fnms[i] <- file.path(treeCoverDir, paste0(NS, "_", WE,"_treecover2010_v3.tif"))
+    fnms[i] <- file.path(treeCoverDir, paste0(treecover2010,"_",NS, "_", WE,".tif"))
   }
   unique(fnms)
 }
